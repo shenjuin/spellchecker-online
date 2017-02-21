@@ -1,7 +1,3 @@
-"""
-This script runs the application using a development server.
-"""
-
 import bottle
 import os
 import sys
@@ -13,6 +9,10 @@ from bottle import request, route, run, Response, template
 @route("/home")
 def home():
 	return template('index.tpl', request=request)
+
+@route("/check")
+def check():
+	return
 
 if '--debug' in sys.argv[1:] or 'SERVER_DEBUG' in os.environ:
     # Debug mode will enable more verbose output in the console window.
