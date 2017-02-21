@@ -99,10 +99,6 @@ def worddistance(word, corpus_word):
 def autocorrect(word):
     """Checks if input word is in corpus: if not, measures word distance and provides nearest word suggestions (if any)"""
 
-	# Remove unwanted characters from corpus words that might still exist due to the addition of contraction words
-
-	corpus_list = [corpus_word.strip(badchars) for corpus_word in corpus_list_raw]
-
     # Convert input word to lower case
     
     word = word.lower()
