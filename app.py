@@ -11,6 +11,7 @@ def home():
 @route("/check")
 def check():
 	word = request.params.get('word')
+	init()
 	result = worddistance(word, 'redi')
 	return json.dumps({'result': result})
 
