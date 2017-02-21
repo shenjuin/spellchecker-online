@@ -11,8 +11,8 @@ def home():
 @route("/check")
 def check():
 	word = request.params.get('word')
-	init()
-	result = autocorrect(word)
+	corpus_list = init()
+	result = autocorrect(word, corpus_list)
 	return json.dumps({'result': result})
 
 if '--debug' in sys.argv[1:] or 'SERVER_DEBUG' in os.environ:
@@ -45,7 +45,6 @@ if __name__ == '__main__':
     bottle.run(server='wsgiref', host=HOST, port=PORT)
 
 def init():
-	global alphabets, badchars, corpus_list_raw, corpus_list
 	alphabets = string.ascii_lowercase
 	badchars = string.punctuation + string.digits
 	corpus_list_raw = []
@@ -64,6 +63,8 @@ def init():
 	# Remove unwanted characters from corpus words that might still exist due to the addition of contraction words
 
 	corpus_list = [corpus_word.strip(badchars) for corpus_word in corpus_list_raw]
+	
+	return corpus_list
 
 # Measure word distance(s) between input word and corpus word(s)
 
@@ -96,7 +97,7 @@ def worddistance(word, corpus_word):
     
     return word_distance
 
-def autocorrect(word):
+def autocorrect(word, corpus_list):
     """Checks if input word is in corpus: if not, measures word distance and provides nearest word suggestions (if any)"""
 
     # Convert input word to lower case
