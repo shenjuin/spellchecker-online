@@ -31,6 +31,7 @@ with open("big.txt", "r") as txtfile:
 corpus_list = [corpus_word.strip(badchars) for corpus_word in corpus_list_raw]
 
 @route("/")
+@route("/home")
 def home():
 	return template('index.tpl', request=request)
 
