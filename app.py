@@ -11,7 +11,7 @@ def home():
 @route("/check")
 def check():
 	word = request.params.get('word')
-	result = autocorrect(word)
+	result = init()
 	return json.dumps({'result': result})
 
 if '--debug' in sys.argv[1:] or 'SERVER_DEBUG' in os.environ:
@@ -62,6 +62,7 @@ def init():
 	# Remove unwanted characters from corpus words that might still exist due to the addition of contraction words
 
 	corpus_list = [corpus_word.strip(badchars) for corpus_word in corpus_list_raw]
+	return "init done"
 
 # Measure word distance(s) between input word and corpus word(s)
 
