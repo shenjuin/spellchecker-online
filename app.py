@@ -6,8 +6,8 @@ import spell
 from bottle import request, route, run, Response, template
 
 @route("/")
+@route("/home")
 def home():
-	init()
 	return template('index.tpl', request=request)
 
 @route("/check")
