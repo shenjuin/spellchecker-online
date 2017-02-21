@@ -98,11 +98,11 @@ def worddistance(word, corpus_word):
 
 def autocorrect(word):
     """Checks if input word is in corpus: if not, measures word distance and provides nearest word suggestions (if any)"""
-	
+
 	alphabets = string.ascii_lowercase
 	badchars = string.punctuation + string.digits
 	corpus_list_raw = []
-	
+
 	with open("big.txt", "r") as txtfile:
 		for corpus_line in txtfile:
 			corpus_line = corpus_line.lower().strip()
