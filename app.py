@@ -11,7 +11,7 @@ def home():
 @route("/check")
 def check():
 	word = request.params.get('word')
-	result = autocorrect(word)
+	result = worddistance(word, 'redi')
 	return json.dumps({'result': result})
 
 if '--debug' in sys.argv[1:] or 'SERVER_DEBUG' in os.environ:
