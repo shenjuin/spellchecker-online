@@ -1,7 +1,7 @@
-badchars = string.punctuation + string.digits
-alphabets = string.ascii_lowercase
+global badchars = string.punctuation + string.digits
+global alphabets = string.ascii_lowercase
 
-corpus_list_raw = []
+global corpus_list_raw = []
 
 with open("big.txt", "r") as txtfile:
     for corpus_line in txtfile:
@@ -16,7 +16,7 @@ with open("big.txt", "r") as txtfile:
 
 # Remove unwanted characters from corpus words that might still exist due to the addition of contraction words
 
-corpus_list = [corpus_word.strip(badchars) for corpus_word in corpus_list_raw]
+global corpus_list = [corpus_word.strip(badchars) for corpus_word in corpus_list_raw]
 
 # Measure word distance(s) between input word and corpus word(s)
 
