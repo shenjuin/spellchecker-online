@@ -6,18 +6,13 @@ import bottle
 import os
 import sys
 
-from bottle import request, route, run, Response, template, view
-
-from datetime import datetime
+from bottle import request, route, run, Response, template
 
 @route('/')
 @route('/home')
-@view('index')
 def home():
     """Renders the home page."""
-    return dict(
-        year=datetime.now().year
-    )
+    return template('index.tpl')
 
 if '--debug' in sys.argv[1:] or 'SERVER_DEBUG' in os.environ:
     # Debug mode will enable more verbose output in the console window.
