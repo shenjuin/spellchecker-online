@@ -62,7 +62,7 @@ def init():
 	# Remove unwanted characters from corpus words that might still exist due to the addition of contraction words
 
 	corpus_list = [corpus_word.strip(badchars) for corpus_word in corpus_list_raw]
-	return "init done"
+	return str("init done")
 
 # Measure word distance(s) between input word and corpus word(s)
 
