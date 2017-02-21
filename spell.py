@@ -1,6 +1,7 @@
 def init():
-	global alphabets 
+	global alphabets, badchars
 	alphabets = string.ascii_lowercase
+	badchars = string.punctuation + string.digits
 
 # Measure word distance(s) between input word and corpus word(s)
 
