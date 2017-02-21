@@ -103,16 +103,6 @@ def autocorrect(word):
 	badchars = string.punctuation + string.digits
 	corpus_list_raw = []
 
-	with open("big.txt", "r") as txtfile:
-		for corpus_line in txtfile:
-			corpus_line = corpus_line.lower().strip()
-			for char in corpus_line:
-				if char in badchars:
-					if (char == chr(39)) and (("n"+char+"t") or (char+"s") in corpus_line):
-						continue
-					else:
-						corpus_line = corpus_line.replace(char," ")
-			corpus_list_raw += corpus_line.split()
 
 	# Remove unwanted characters from corpus words that might still exist due to the addition of contraction words
 
