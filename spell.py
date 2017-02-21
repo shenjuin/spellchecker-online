@@ -1,5 +1,6 @@
 def init():
-	global alphabets = string.ascii_lowercase
+	global alphabets 
+	alphabets = string.ascii_lowercase
 
 # Measure word distance(s) between input word and corpus word(s)
 
