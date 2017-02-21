@@ -4,8 +4,6 @@ import sys
 import json
 from bottle import request, route, run, Response, template
 
-init()
-
 @route("/")
 def home():
 	return template('index.tpl', request=request)
@@ -24,6 +22,7 @@ if '--debug' in sys.argv[1:] or 'SERVER_DEBUG' in os.environ:
 def wsgi_app():
     """Returns the application to make available through wfastcgi. This is used
     when the site is published to Microsoft Azure."""
+	init()
     return bottle.default_app()
 
 if __name__ == '__main__':
