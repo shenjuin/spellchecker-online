@@ -1,7 +1,4 @@
-global badchars = string.punctuation + string.digits
-global alphabets = string.ascii_lowercase
 
-global corpus_list_raw = []
 
 with open("big.txt", "r") as txtfile:
     for corpus_line in txtfile:
