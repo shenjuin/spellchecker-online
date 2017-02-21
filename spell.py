@@ -1,3 +1,9 @@
+badchars = string.punctuation + string.digits
+alphabets = string.ascii_lowercase
+
+corpus_list_raw = []
+
+
 
 # Measure word distance(s) between input word and corpus word(s)
 
