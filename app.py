@@ -99,6 +99,8 @@ def worddistance(word, corpus_word):
 def autocorrect(word):
     """Checks if input word is in corpus: if not, measures word distance and provides nearest word suggestions (if any)"""
 
+	badchars = string.punctuation + string.digits
+	
     # Convert input word to lower case
     
     word = word.lower()
