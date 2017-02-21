@@ -7,6 +7,9 @@ def init():
 	with open("big.txt", "r") as txtfile:
 		for corpus_line in txtfile:
 			corpus_line = corpus_line.lower().strip()
+			for char in corpus_line:
+				if char in badchars:
+					continue
 
 	# Remove unwanted characters from corpus words that might still exist due to the addition of contraction words
 
