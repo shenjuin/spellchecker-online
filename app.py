@@ -8,11 +8,11 @@ from bottle import request, route, run, Response, template
 @route("/")
 @route("/home")
 def home():
+	spell.init()
 	return template('index.tpl', request=request)
 
 @route("/check")
 def check():
-	spell.init()
 	word = request.params.get('word')
 	result = spell.autocorrect(word)
 	return json.dumps({'result': result})
