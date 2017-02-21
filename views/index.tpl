@@ -1,10 +1,12 @@
 <!doctype html>
+<head>
 <title>Spell Checker</title>
 <script type="text/javascript"
   src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script type="text/javascript">
   var $SCRIPT_ROOT = "{{ request.script_name }}";
 </script>
+</head>
 
 <body>
 <script type="text/javascript">
