@@ -1,19 +1,5 @@
 def init():
-	with open("big.txt", "r") as txtfile:
-    for corpus_line in txtfile:
-        corpus_line = corpus_line.lower().strip() # Change all alphabets to lower case, then remove leading and/or trailing whitespace(s)
-        for char in corpus_line:
-            if char in badchars: 
-                if (char == chr(39)) and (("n"+char+"t") or (char+"s") in corpus_line): # Keep the punctuation on contraction words, e.g. "don't", "can't", "engineer's", etc.
-                    continue
-                else:
-                    corpus_line = corpus_line.replace(char," ") # Remove digits and punctuation from all other words
-        corpus_list_raw += corpus_line.split()
-
-	# Remove unwanted characters from corpus words that might still exist due to the addition of contraction words
-	
-	corpus_list = [corpus_word.strip(badchars) for corpus_word in corpus_list_raw]
-
+	alphabets = string.ascii_lowercase
 
 # Measure word distance(s) between input word and corpus word(s)
 
