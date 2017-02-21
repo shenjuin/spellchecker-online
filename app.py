@@ -11,8 +11,7 @@ def home():
 @route("/check")
 def check():
 	word = request.params.get('word')
-	init()
-	result = autocorrect(word)
+	result = dummy()
 	return json.dumps({'result': result})
 
 if '--debug' in sys.argv[1:] or 'SERVER_DEBUG' in os.environ:
@@ -20,6 +19,9 @@ if '--debug' in sys.argv[1:] or 'SERVER_DEBUG' in os.environ:
     # It must be set at the beginning of the script.
     bottle.debug(True)
 
+def dummy():
+	return str("see!")
+	
 def wsgi_app():
     """Returns the application to make available through wfastcgi. This is used
     when the site is published to Microsoft Azure."""
