@@ -1,4 +1,4 @@
-define init():
+def init():
 	with open("big.txt", "r") as txtfile:
     for corpus_line in txtfile:
         corpus_line = corpus_line.lower().strip() # Change all alphabets to lower case, then remove leading and/or trailing whitespace(s)
