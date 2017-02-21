@@ -10,7 +10,7 @@ def home():
 
 @route("/check")
 def check():
-	init()
+	#init()
 	word = request.params.get('word')
 	result = autocorrect(word)
 	return json.dumps({'result': result})
