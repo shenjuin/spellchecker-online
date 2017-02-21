@@ -9,10 +9,9 @@ def home():
 	return template('index.tpl', request=request)
 
 @route("/check")
-@app.app_context_processor
 def check():
-	word = request.params.get('word')
 	corpus_list = init()
+	word = request.params.get('word')
 	result = autocorrect(word, corpus_list)
 	return json.dumps({'result': result})
 
