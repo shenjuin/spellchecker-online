@@ -8,6 +8,12 @@ import sys
 import json
 from bottle import request, route, run, Response, template
 
+badchars = string.punctuation + string.digits
+alphabets = string.ascii_lowercase
+
+corpus_list_raw = []
+
+
 @route("/")
 @route("/home")
 def home():
