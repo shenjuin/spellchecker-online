@@ -1,3 +1,5 @@
+import string
+
 def init():
 	global badchars = string.punctuation + string.digits
 	global alphabets = string.ascii_lowercase
