@@ -2,11 +2,9 @@ import bottle
 import os
 import sys
 import json
-import spell
 from bottle import request, route, run, Response, template
 
 @route("/")
-@route("/home")
 def home():
 	return template('index.tpl', request=request)
 
