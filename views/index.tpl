@@ -1,5 +1,5 @@
-% rebase('layout.tpl', title='Home Page', year=year)
-
+<html>
+<body>
 <div class="jumbotron">
     <h1>Bottle</h1>
     <p class="lead">Bottle is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
@@ -27,3 +27,5 @@
         <p><a class="btn btn-default" href="http://azure.microsoft.com">Learn more &raquo;</a></p>
     </div>
 </div>
+</body>
+</html>
