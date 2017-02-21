@@ -8,6 +8,8 @@ import sys
 import json
 from bottle import request, route, run, Response, template
 
+app = bottle.default_app()
+
 badchars = string.punctuation + string.digits
 alphabets = string.ascii_lowercase
 
@@ -29,7 +31,7 @@ with open("big.txt", "r") as txtfile:
 corpus_list = [corpus_word.strip(badchars) for corpus_word in corpus_list_raw]
 
 @route("/")
-def index():
+def home():
 	return template('index.tpl', request=request)
 
 @route("/check")
