@@ -5,7 +5,8 @@ def init():
 	corpus_list_raw = []
 	
 	with open("big.txt", "r") as txtfile:
-		read_data = txtfile.read()
+		for corpus_line in txtfile:
+			corpus_line = corpus_line.lower().strip()
 
 	# Remove unwanted characters from corpus words that might still exist due to the addition of contraction words
 
