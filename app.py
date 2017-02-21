@@ -4,13 +4,14 @@ import sys
 import json
 from bottle import request, route, run, Response, template
 
+init()
+
 @route("/")
 def home():
 	return template('index.tpl', request=request)
 
 @route("/check")
 def check():
-	#init()
 	word = request.params.get('word')
 	result = autocorrect(word)
 	return json.dumps({'result': result})
