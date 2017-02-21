@@ -3,6 +3,9 @@ def init():
 	alphabets = string.ascii_lowercase
 	badchars = string.punctuation + string.digits
 	corpus_list_raw = []
+	
+	with open("big.txt", "r") as txtfile:
+		read_data = txtfile.read()
 
 	# Remove unwanted characters from corpus words that might still exist due to the addition of contraction words
 
