@@ -8,13 +8,12 @@ from bottle import request, route, run, Response, template
 @route("/")
 @route("/home")
 def home():
-	spell.init()
 	return template('index.tpl', request=request)
 
 @route("/check")
 def check():
 	word = request.params.get('word')
-	result = spell.autocorrect(word)
+	result = autocorrect(word)
 	return json.dumps({'result': result})
 
 if '--debug' in sys.argv[1:] or 'SERVER_DEBUG' in os.environ:
@@ -45,3 +44,23 @@ if __name__ == '__main__':
 
     # Starts a local test server.
     bottle.run(server='wsgiref', host=HOST, port=PORT)
+
+global alphabets, badchars, corpus_list_raw, corpus_list
+alphabets = string.ascii_lowercase
+badchars = string.punctuation + string.digits
+corpus_list_raw = []
+
+with open("big.txt", "r") as txtfile:
+	for corpus_line in txtfile:
+		corpus_line = corpus_line.lower().strip()
+		for char in corpus_line:
+			if char in badchars:
+				if (char == chr(39)) and (("n"+char+"t") or (char+"s") in corpus_line):
+					continue
+				else:
+					corpus_line = corpus_line.replace(char," ")
+		corpus_list_raw += corpus_line.split()
+
+# Remove unwanted characters from corpus words that might still exist due to the addition of contraction words
+
+corpus_list = [corpus_word.strip(badchars) for corpus_word in corpus_list_raw]
