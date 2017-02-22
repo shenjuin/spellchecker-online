@@ -45,7 +45,7 @@ if __name__ == '__main__':
     bottle.run(server='wsgiref', host=HOST, port=PORT)
 
 def init():
-    global alphabets, badchars, corpus_list_raw, corpus_list
+    
     alphabets = string.ascii_lowercase
     badchars = string.punctuation + string.digits
     corpus_list_raw = []
