@@ -1,4 +1,4 @@
-# Spellchecker [![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
+# Spellchecker
 
 Spellchecker, as its name suggests, is a simple spelling checker. Enter a word and it will tell you whether your spelling is correct. If it isn't, a most likely word will be suggested.
 
