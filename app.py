@@ -1,5 +1,6 @@
 import bottle
 import os
+import string
 import sys
 import json
 from bottle import request, route, run, Response, template
@@ -77,11 +78,13 @@ def worddistance(word, corpus_word):
 def autocorrect(word):
     """Checks if input word is in corpus: if not, measures word distance and provides nearest word suggestions (if any)"""
     
+    alphabets = string.ascii_lowercase
+    
     # Convert input word to lower case
 
     word = word.lower()
     
-    if (len(word) ==  1): 
+    if (len(word) ==  1 and word in alphabets): 
         return str("The spelling is correct")
 
     # If input word contains unwanted character(s), print a reminder statement
