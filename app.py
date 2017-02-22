@@ -80,13 +80,11 @@ def autocorrect(word):
     
     alphabets = string.ascii_lowercase
     badchars = string.punctuation + string.digits
+    corpus_list_raw = []
     
     # Convert input word to lower case
 
     word = word.lower()
-    
-    if (len(word) ==  1 and word in badchars): 
-        return str("The spelling is incorrect")
 
     # If input word contains unwanted character(s), print a reminder statement
 
