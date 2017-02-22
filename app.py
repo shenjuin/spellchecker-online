@@ -85,13 +85,6 @@ def autocorrect(word):
     with open("big.txt", "r") as txtfile:
         for corpus_line in txtfile:
             corpus_line = corpus_line.lower().strip()
-            for char in corpus_line:
-                if char in badchars:
-                    if (char == chr(39)) and (("n"+char+"t") or (char+"s") in corpus_line):
-                        continue
-                    else:
-                        corpus_line = corpus_line.replace(char," ")
-            corpus_list_raw += corpus_line.split()
 
     # Convert input word to lower case
 
