@@ -11,6 +11,7 @@ def home():
 
 @route("/check")
 def check():
+    init()
     word = request.params.get('word')
     result = autocorrect(word)
     return json.dumps({'result': result})
@@ -43,6 +44,29 @@ if __name__ == '__main__':
 
     # Starts a local test server.
     bottle.run(server='wsgiref', host=HOST, port=PORT)
+
+# Initialize corpus
+
+def init():
+    global alphabets, badchars, corpus_list_raw, corpus_list
+    alphabets = string.ascii_lowercase
+    badchars = string.punctuation + string.digits
+    corpus_list_raw = []
+
+    with open("big.txt", "r") as txtfile:
+        for corpus_line in txtfile:
+            corpus_line = corpus_line.lower().strip()
+            for char in corpus_line:
+                if char in badchars:
+                    if (char == chr(39)) and (("n"+char+"t") or (char+"s") in corpus_line):
+                        continue
+                    else:
+                        corpus_line = corpus_line.replace(char," ")
+            corpus_list_raw += corpus_line.split()
+
+    # Remove unwanted characters from corpus words that might still exist due to the addition of contraction words
+
+    corpus_list = [corpus_word.strip(badchars) for corpus_word in corpus_list_raw]
 
 # Measure word distance(s) between input word and corpus word(s)
 
@@ -77,28 +101,6 @@ def worddistance(word, corpus_word):
 
 def autocorrect(word):
     """Checks if input word is in corpus: if not, measures word distance and provides nearest word suggestions (if any)"""
-    
-    alphabets = string.ascii_lowercase
-    badchars = string.punctuation + string.digits
-    corpus_list_raw = []
-    
-    PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
-    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'big.txt').replace('\\', '/')
-    
-    with open(STATIC_ROOT, "r") as txtfile:
-        for corpus_line in txtfile:
-            corpus_line = corpus_line.lower().strip()
-            for char in corpus_line:
-                if char in badchars:
-                    if (char == chr(39)) and (("n"+char+"t") or (char+"s") in corpus_line):
-                        continue
-                    else:
-                        corpus_line = corpus_line.replace(char," ")
-            corpus_list_raw += corpus_line.split()
-
-    # Remove unwanted characters from corpus words that might still exist due to the addition of contraction words
-
-    corpus_list = [corpus_word.strip(badchars) for corpus_word in corpus_list_raw]
     
     # Convert input word to lower case
 
