@@ -79,13 +79,14 @@ def autocorrect(word):
     """Checks if input word is in corpus: if not, measures word distance and provides nearest word suggestions (if any)"""
     
     alphabets = string.ascii_lowercase
+    badchars = string.punctuation + string.digits
     
     # Convert input word to lower case
 
     word = word.lower()
     
-    if (len(word) ==  1 and word in alphabets): 
-        return str("The spelling is correct")
+    if (len(word) ==  1 and word in badchars): 
+        return str("The spelling is incorrect")
 
     # If input word contains unwanted character(s), print a reminder statement
 
