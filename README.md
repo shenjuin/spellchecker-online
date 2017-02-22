@@ -1,5 +1,7 @@
-# BottleAppAzure [![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
+# Spellchecker [![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
 
-Bottle is a fast, simple and lightweight WSGI micro web-framework for Python. It is distributed as a single file module and has no dependencies other than the Python Standard Library.
-- [Get Started](http://bottlepy.org/docs/dev/index.html)
-- [Development blog](http://blog.bottlepy.org/)
+Spellchecker, as its name suggests, is a simple spelling checker. Enter a word and it will tell you whether your spelling is correct. If it isn't, a most likely word will be suggested.
+
+Try it out [here](http://spellchecker.azurewebsites.net)
+
+Work in progress: refining the algorithm for suggesting a close match if spelling is incorrect.
