@@ -6,23 +6,20 @@ from bottle import request, route, run, Response, template
 
 @route("/")
 def home():
-	return template('index.tpl', request=request)
+    return template('index.tpl', request=request)
 
 @route("/check")
 def check():
-	word = request.params.get('word')
-	init()
-	result = autocorrect(word)
-	return json.dumps({'result': result})
+    word = request.params.get('word')
+    init()
+    result = autocorrect(word)
+    return json.dumps({'result': result})
 
 if '--debug' in sys.argv[1:] or 'SERVER_DEBUG' in os.environ:
     # Debug mode will enable more verbose output in the console window.
     # It must be set at the beginning of the script.
     bottle.debug(True)
 
-def dummy():
-	return str("see!")
-	
 def wsgi_app():
     """Returns the application to make available through wfastcgi. This is used
     when the site is published to Microsoft Azure."""
@@ -48,43 +45,43 @@ if __name__ == '__main__':
     bottle.run(server='wsgiref', host=HOST, port=PORT)
 
 def init():
-	global alphabets, badchars, corpus_list_raw, corpus_list
-	alphabets = string.ascii_lowercase
-	badchars = string.punctuation + string.digits
-	corpus_list_raw = []
-	
-	with open("big.txt", "r") as txtfile:
-		for corpus_line in txtfile:
-			corpus_line = corpus_line.lower().strip()
-			for char in corpus_line:
-				if char in badchars:
-					if (char == chr(39)) and (("n"+char+"t") or (char+"s") in corpus_line):
-						continue
-					else:
-						corpus_line = corpus_line.replace(char," ")
-			corpus_list_raw += corpus_line.split()
+    global alphabets, badchars, corpus_list_raw, corpus_list
+    alphabets = string.ascii_lowercase
+    badchars = string.punctuation + string.digits
+    corpus_list_raw = []
 
-	# Remove unwanted characters from corpus words that might still exist due to the addition of contraction words
+    with open("big.txt", "r") as txtfile:
+        for corpus_line in txtfile:
+            corpus_line = corpus_line.lower().strip()
+            for char in corpus_line:
+                if char in badchars:
+                    if (char == chr(39)) and (("n"+char+"t") or (char+"s") in corpus_line):
+                        continue
+                    else:
+                        corpus_line = corpus_line.replace(char," ")
+            corpus_list_raw += corpus_line.split()
 
-	corpus_list = [corpus_word.strip(badchars) for corpus_word in corpus_list_raw]
+    # Remove unwanted characters from corpus words that might still exist due to the addition of contraction words
+
+    corpus_list = [corpus_word.strip(badchars) for corpus_word in corpus_list_raw]
 
 # Measure word distance(s) between input word and corpus word(s)
 
 def worddistance(word, corpus_word):
     """Measures the difference between two words and returns an integer value as word distance"""
-    
+
     global word_distance
     word_distance = 0
-    
+
     # Compare input word and a word from the corpus, letter by letter
-    
+
     if len(word) == len(corpus_word):
         for i in range(len(word)):
             if word[i] != corpus_word[i]:
                 word_distance += 1
                 
     # If corpus word is one letter shorter than input word, append a whitespace to the end of it to facilitate comparison
-    
+
     elif len(word) - len(corpus_word) == 1:
         corpus_word_temp = corpus_word + " " 
         for i in range(len(word)):
@@ -96,34 +93,34 @@ def worddistance(word, corpus_word):
         for i in range(len(word_temp)):
             if word_temp[i] != corpus_word[i]:
                 word_distance += 1
-    
+
     return word_distance
 
 def autocorrect(word):
     """Checks if input word is in corpus: if not, measures word distance and provides nearest word suggestions (if any)"""
-	
+
     # Convert input word to lower case
-    
+
     word = word.lower()
-    
+
     # If input word contains unwanted character(s), print a reminder statement
-    
+
     for char in badchars:
         if char in word and (char == word[0] or char == word[-1]): 
             return str("Only alphabets allowed in word. Contraction words are exceptions. Try again.")
-    
+
     # If input word is a single letter, print statement without calling worddistance()
-    
+
     if (len(word) ==  1) and (word in alphabets): 
         return str("The spelling is correct")
-    
+
     # If input word is in corpus, print statement without calling worddistance()
-    
+
     elif word in corpus_list:
         return str("The spelling is correct")
-    
+
     # In all other cases, invoke worddistance() to measure word differences
-    
+
     else:
         # Initialize lists for storing suggested words later on
         
