@@ -77,28 +77,12 @@ def worddistance(word, corpus_word):
 def autocorrect(word):
     """Checks if input word is in corpus: if not, measures word distance and provides nearest word suggestions (if any)"""
     
-    alphabets = string.ascii_lowercase
-    badchars = string.punctuation + string.digits
-    corpus_list_raw = []
-
-    with open("big.txt", "r") as txtfile:
-        for corpus_line in txtfile:
-            corpus_line = corpus_line.lower().strip()
-            for char in corpus_line:
-                if char in badchars:
-                    if (char == chr(39)) and (("n"+char+"t") or (char+"s") in corpus_line):
-                        continue
-                    else:
-                        corpus_line = corpus_line.replace(char," ")
-            corpus_list_raw += corpus_line.split()
-
-    # Remove unwanted characters from corpus words that might still exist due to the addition of contraction words
-
-    corpus_list = [corpus_word.strip(badchars) for corpus_word in corpus_list_raw]
-    
     # Convert input word to lower case
 
     word = word.lower()
+    
+    if (len(word) ==  1): 
+        return str("The spelling is correct")
 
     # If input word contains unwanted character(s), print a reminder statement
 
