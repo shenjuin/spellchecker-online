@@ -82,7 +82,10 @@ def autocorrect(word):
     badchars = string.punctuation + string.digits
     corpus_list_raw = []
     
-    with open("big.txt", "r") as txtfile:
+    PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'big.txt').replace('\\', '/')
+    
+    with open(STATIC_ROOT, "r") as txtfile:
         txtdata = txtfile.read()
 
     # Convert input word to lower case
