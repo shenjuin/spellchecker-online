@@ -7,11 +7,11 @@ from bottle import request, route, run, Response, template
 
 @route("/")
 def home():
+    init()
     return template('index.tpl', request=request)
 
 @route("/check")
 def check():
-    init()
     word = request.params.get('word')
     result = autocorrect(word)
     return json.dumps({'result': result})
