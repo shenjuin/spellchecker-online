@@ -5,9 +5,10 @@ import sys
 import json
 from bottle import request, route, run, Response, template
 
+init()
+
 @route("/")
 def home():
-    init()
     return template('index.tpl', request=request)
 
 @route("/check")
