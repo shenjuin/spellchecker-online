@@ -83,8 +83,7 @@ def autocorrect(word):
     corpus_list_raw = []
     
     with open("big.txt", "r") as txtfile:
-        for corpus_line in txtfile:
-            corpus_line = corpus_line.lower().strip()
+        txtdata = txtfile.read()
 
     # Convert input word to lower case
 
