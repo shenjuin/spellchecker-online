@@ -1,3 +1,5 @@
+import string
+
 # Initialize corpus
 
 def init():
